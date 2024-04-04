@@ -4,11 +4,19 @@ class CountriesController < ApplicationController
     if params[:search].present?
       @countries = @countries.search(params[:search])
     end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @countries }
+    end
   end
 
   def destroy
     @country = Country.find_by_id(params[:id])
     @country&.soft_delete
-    redirect_to countries_path
+    respond_to do |format|
+      format.html { redirect_to countries_path }
+      format.json { head :no_content }
+    end
   end
 end

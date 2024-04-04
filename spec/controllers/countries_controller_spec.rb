@@ -7,6 +7,12 @@ RSpec.describe CountriesController, type: :controller do
       expect(response).to render_template("index")
     end
 
+    it "returns a success response in JSON format" do
+      get :index, format: :json
+      expect(response).to be_successful
+      expect(JSON.parse(response.body)).to be_an_instance_of(Array)
+    end
+
     it "assigns all countries ordered by name to @countries" do
       countryB = create(:country, name: "B")
       countryA = create(:country, name: "A")
@@ -28,6 +34,12 @@ RSpec.describe CountriesController, type: :controller do
       expect(country.deleted?).to be(false)
       delete :destroy, params: { id: country.id }
       expect(country.reload.deleted_at).to be_present
+    end
+
+    it "returns a success response in JSON format after deletion" do
+      country = create(:country)
+      delete :destroy, params: { id: country.id }, format: :json
+      expect(response).to have_http_status(:no_content)
     end
 
     it "redirects to the index page after deletion" do
