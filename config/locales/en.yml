@@ -28,4 +28,14 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  search: "Search"
+  actions: "Actions"
+  countries:
+    name: "Name"
+    alpha_code_2: "Alpha Code 2"
+    alpha_code_3: "Alpha Code 3"
+    currency_code: "Currency Code"
+    index:
+      search_placeholder: "Search by alpha codes or currency"
+      no_countries_found: "No countries found"
+      title: "Countries"
